@@ -58,7 +58,10 @@ class DockerHomeAssistant(DockerInterface):
             privileged=True,
             init=True,
             devices=self.devices,
-            network_mode='host',
+            network_mode='bridge',
+            labels={
+                'traefik.port': '8123',
+            },
             environment={
                 'HASSIO': self.sys_docker.network.supervisor,
                 ENV_TIME: self.sys_timezone,
